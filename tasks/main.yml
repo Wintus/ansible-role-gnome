@@ -11,7 +11,8 @@
 
 - name: install psutil of python
   become: yes
-  package: name=python-psutil
+  package:
+    name: python-psutil
 
 - name: set UI scale automatic
   dconf:
