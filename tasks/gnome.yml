@@ -1,0 +1,47 @@
+---
+
+- name: set home folder names in English
+  command: xdg-user-dirs-update
+  environment:
+    LC_ALL: C
+  changed_when: no
+
+- debug:
+    msg: run xdg-user-dirs-gtk-update instead
+
+- name: install psutil of python
+  become: yes
+  package:
+    name: python3-psutil
+
+- name: set UI scale automatic
+  dconf:
+    key: "{{ dconf_dir }}/interface/scaling-factor"
+    value: 0
+
+- name: disable super key to open activity
+  dconf:
+    key: "/org/gnome/mutter/overlay-key"
+    value: "''"
+
+- name: set Emacs keybinding
+  dconf:
+    key: "{{ dconf_dir }}/interface/gtk-key-theme"
+    value: "'Emacs'"
+
+- name: fix workspace up/down keybindings
+  block:
+    - name: set keybindings to move workspace up
+      dconf:
+        key: "{{ dconf_dir }}/wm/keybindings/switch-to-workspace-up"
+        value: "['<Super>Page_Up', '<Super><Alt>Up']"
+
+    - name: set keybindings to move workspace down
+      dconf:
+        key: "{{ dconf_dir }}/wm/keybindings/switch-to-workspace-down"
+        value: "['<Super>Page_Down', '<Super><Alt>Down']"
+
+- name: set Caps to Ctrl
+  dconf:
+    key: "{{ dconf_dir }}/input-sources/xkb-options"
+    value: "['ctrl:nocaps']"
