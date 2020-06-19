@@ -1,4 +1,5 @@
 ---
 
 - name: setup GNOME
+  when: lookup('env','XDG_CURRENT_DESKTOP') | regex_search('GNOME')
   import_tasks: gnome.yml
