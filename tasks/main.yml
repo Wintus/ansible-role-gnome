@@ -1,7 +1,7 @@
 ---
 
 - name: set home folder names in English
-  shell: xdg-user-dirs-update
+  command: xdg-user-dirs-update
   environment:
     LC_ALL: C
   changed_when: no
