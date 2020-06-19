@@ -39,3 +39,8 @@
       dconf:
         key: "{{ dconf_dir }}/wm/keybindings/switch-to-workspace-down"
         value: "['<Super>Page_Down', '<Super><Alt>Down']"
+
+- name: set Caps to Ctrl
+  dconf:
+    key: "{{ dconf_dir }}/input-sources/xkb-options"
+    value: "['ctrl:nocaps']"
